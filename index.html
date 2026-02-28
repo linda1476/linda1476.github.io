@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kw0n의 Github Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #111111;
+      --white:   #FFFFFF;
+      --gray-50: #F8F8F8;
+      --gray-100:#F0F0F0;
+      --gray-200:#E4E4E4;
+      --gray-400:#AAAAAA;
+      --gray-600:#666666;
+      --red:     #E8001C;
+      --radius-pill: 9999px;
+      --radius-card: 12px;
+      --font:    'Noto Sans KR', sans-serif;
+      --transition: .38s cubic-bezier(.4,0,.2,1);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      overflow: hidden;
+    }
+
+    /* ── Slide container ── */
+    .slides-wrap {
+      display: flex;
+      width: 300vw;
+      height: 100vh;
+      transition: transform var(--transition);
+    }
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Shared header ── */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--gray-200);
+      height: 62px;
+    }
+    .site-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo-text {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    .logo-badge {
+      height: 20px;
+      width: 20px;
+      background: var(--black);
+      border-radius: 4px;
+    }
+
+    /* ── Slide content areas ── */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 40px 32px;
+      overflow: hidden;
+    }
+
+    /* ─────────────────────────────────────
+       PAGE 1  ─  Main
+    ───────────────────────────────────── */
+    .p1-products {
+      display: flex;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .product-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 22px 0 6px;
+      height: 56px;
+      border: 1.5px solid var(--black);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    .product-pill:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+    .product-pill:hover .pill-icon { filter: invert(1); }
+    .pill-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      transition: filter var(--transition);
+    }
+
+    .p1-divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin: 30px 0;
+    }
+
+    .p1-links-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 18px;
+    }
+
+    .p1-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .nav-link-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-card);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--black);
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .nav-link-row:hover {
+      border-color: var(--black);
+      background: var(--gray-50);
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    }
+    .nav-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--gray-200);
+    }
+    .nav-link-label {
+      font-size: 15px;
+      font-weight: 700;
+      flex: 1;
+    }
+    .nav-arrow {
+      font-size: 18px;
+      color: var(--gray-400);
+      font-weight: 400;
+      transition: transform var(--transition), color var(--transition);
+    }
+    .nav-link-row:hover .nav-arrow {
+      transform: translateX(4px);
+      color: var(--black);
+    }
+
+    /* ─────────────────────────────────────
+       PAGE 2  ─  작동 방식 (자율주행 휠체어)
+    ───────────────────────────────────── */
+    .page-heading-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 24px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--black);
+      margin-bottom: 28px;
+    }
+    .page-heading-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .page-sub {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+    .page-heading {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .product-tags {
+      display: flex;
+      gap: 8px;
+    }
+    .tag-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 14px 0 5px;
+      height: 38px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .tag-pill.active {
+      background: var(--black);
+      color: var(--white);
+      border: 1.5px solid var(--black);
+    }
+    .tag-pill.active img { filter: invert(1); }
+    .tag-pill.inactive {
+      background: var(--white);
+      color: var(--black);
+      border: 1.5px solid var(--gray-200);
+    }
+    .tag-pill.inactive:hover {
+      border-color: var(--black);
+    }
+    .tag-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Process flow */
+    .flow-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow: hidden;
+    }
+    .flow-steps-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .flow-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .step-box {
+      padding: 14px 18px;
+      border: 1.5px solid var(--black);
+      border-radius: var(--radius-card);
+      min-height: 64px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .flow-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      flex-shrink: 0;
+    }
+    .connector-arrow {
+      font-size: 20px;
+      color: var(--gray-400);
+    }
+    .flow-connector.down {
+      width: auto;
+      height: 20px;
+      align-self: stretch;
+      justify-content: flex-start;
+      padding-left: 18px;
+    }
+    .connector-down {
+      font-size: 20px;
+      color: var(--gray-400);
+    }
+
+    .flow-row2 {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .priority-card {
+      flex: 1;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-card);
+      padding: 16px 18px;
+      background: var(--gray-50);
+    }
+    .priority-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.2px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .priority-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 5px 0;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    .priority-rank {
+      font-weight: 700;
+      color: var(--gray-600);
+      white-space: nowrap;
+    }
+
+    .steps-bottom {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .step-return {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .diff-section {
+      margin-top: 16px;
+      padding: 16px 20px;
+      border-radius: var(--radius-card);
+      border-left: 3px solid var(--black);
+      background: var(--gray-50);
+    }
+    .diff-title {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: -.2px;
+      margin-bottom: 6px;
+    }
+    .diff-text {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--gray-600);
+    }
+
+    .bottom-nav {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .bottom-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-pill);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .bottom-link:hover {
+      border-color: var(--black);
+      background: var(--gray-50);
+    }
+    .bottom-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* ─────────────────────────────────────
+       PAGE 3  ─  준비중
+    ───────────────────────────────────── */
+    .coming-soon-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding-bottom: 60px;
+    }
+    .coming-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 4px;
+    }
+    .coming-title {
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--red);
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+    .coming-sub {
+      font-size: 15px;
+      color: var(--gray-600);
+      font-weight: 400;
+      margin-top: 8px;
+    }
+    .coming-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--red);
+      margin: 8px 0;
+    }
+
+    /* ── Slide nav dots ── */
+    .slide-dots {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      transition: background var(--transition), width var(--transition);
+      cursor: pointer;
+    }
+    .dot.active {
+      background: var(--black);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 600px) {
+      .site-header { padding: 14px 20px; }
+      .slide-body   { padding: 0 20px 80px; }
+      .page-heading { font-size: 32px; }
+      .flow-steps-row { flex-direction: column; gap: 10px; }
+      .flow-connector { display: none; }
+      .coming-title { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slides-wrap" id="slidesWrap">
+
+  <!-- ════════════════════════════
+        SLIDE 1  ─  메인
+  ════════════════════════════ -->
+  <section class="slide">
+    <header class="site-header">
+      <span class="site-title">Kw0n의 Github Page</span>
+      <div class="logo-area">
+        <div class="logo-badge"></div>
+        <span class="logo-text">HIPSPOT</span>
+      </div>
+    </header>
+
+    <div class="slide-body">
+      <!-- 제품 카테고리 -->
+      <div class="p1-products">
+        <button class="product-pill" onclick="goSlide(1)">
+          <img class="pill-icon" src="http://localhost:3845/assets/ea91d1c5bdde458c6858e3053ce53e971d23c36b.png" alt="자율주행 휠체어 아이콘" />
+          자율주행 휠체어
+        </button>
+        <button class="product-pill" onclick="goSlide(2)">
+          <img class="pill-icon" src="http://localhost:3845/assets/48bedaaa3964cd9a79739efdb7225811f13a3f7d.png" alt="장애물 감지 헬멧 아이콘" />
+          장애물 감지 헬멧
+        </button>
+      </div>
+
+      <div class="p1-divider"></div>
+
+      <p class="p1-links-title">바로 가기</p>
+
+      <div class="p1-links">
+        <a class="nav-link-row" href="https://github.com" target="_blank" rel="noopener">
+          <img class="nav-avatar" src="http://localhost:3845/assets/ffc263097ee46be69da42be77ee1de0cff2edd4a.png" alt="GitHub 아이콘" />
+          <span class="nav-link-label">시제품 소스코드 보러 가기</span>
+          <span class="nav-arrow">→</span>
+        </a>
+        <a class="nav-link-row" href="#" onclick="goSlide(1);return false;">
+          <img class="nav-avatar" src="http://localhost:3845/assets/b731281327bd918416d03beb05df41e848fbe000.png" alt="작동방식 아이콘" />
+          <span class="nav-link-label">작동방식 보러 가기</span>
+          <span class="nav-arrow">→</span>
+        </a>
+        <a class="nav-link-row" href="https://drive.google.com" target="_blank" rel="noopener">
+          <img class="nav-avatar" src="http://localhost:3845/assets/cfa98e83f7a79f1c5724ecee7dda10463055b000.png" alt="Google Drive 아이콘" />
+          <span class="nav-link-label">자료 보러 가기</span>
+          <span class="nav-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════
+        SLIDE 2  ─  작동 방식 (자율주행 휠체어)
+  ════════════════════════════ -->
+  <section class="slide">
+    <header class="site-header">
+      <span class="site-title">Kw0n의 Github Page</span>
+      <div class="logo-area">
+        <div class="logo-badge"></div>
+        <span class="logo-text">HIPSPOT</span>
+      </div>
+    </header>
+
+    <div class="slide-body">
+      <div class="page-heading-row">
+        <div class="page-heading-left">
+          <span class="page-sub">How It Works</span>
+          <h1 class="page-heading">작동 방식</h1>
+        </div>
+        <div class="product-tags">
+          <button class="tag-pill active" onclick="goSlide(1)">
+            <img class="tag-icon" src="http://localhost:3845/assets/ea91d1c5bdde458c6858e3053ce53e971d23c36b.png" alt="" />
+            자율주행 휠체어
+          </button>
+          <button class="tag-pill inactive" onclick="goSlide(2)">
+            <img class="tag-icon" src="http://localhost:3845/assets/48bedaaa3964cd9a79739efdb7225811f13a3f7d.png" alt="" />
+            점자블럭 유도 헬멧
+          </button>
+        </div>
+      </div>
+
+      <!-- Flow 1~3 -->
+      <div class="flow-section">
+        <div class="flow-steps-row">
+          <div class="flow-step">
+            <div class="step-box">
+              <span class="step-num">1</span>
+              <span class="step-text">사용자가 UI / 음성 등으로 목적지 입력</span>
+            </div>
+          </div>
+          <div class="flow-connector"><span class="connector-arrow">→</span></div>
+          <div class="flow-step">
+            <div class="step-box">
+              <span class="step-num">2</span>
+              <span class="step-text">카카오맵 API로 길찾기 요청</span>
+            </div>
+          </div>
+          <div class="flow-connector"><span class="connector-arrow">→</span></div>
+          <div class="flow-step">
+            <div class="step-box">
+              <span class="step-num">3</span>
+              <span class="step-text">경로 수신 후 목적지로 주행 시작</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-card 3-1 + Steps 4, 5 -->
+        <div style="display:flex; gap:0; align-items:flex-start; margin-top:4px;">
+
+          <!-- 왼쪽: steps 4, 5 -->
+          <div style="display:flex; flex-direction:column; flex:2; gap:8px;">
+            <div style="display:flex; align-items:center; gap:0;">
+              <div class="flow-connector down" style="width:32px; height:auto; padding:0; align-items:center; justify-content:center; display:flex; flex-shrink:0;">
+                <span style="font-size:18px; color:var(--gray-400);">↓</span>
+              </div>
+              <div style="flex:1;">
+                <div class="step-box" style="border-color:var(--gray-200);">
+                  <span class="step-num" style="background:var(--gray-200); color:var(--black);">4</span>
+                  <span class="step-text">실내 주행 시 카메라로 SLAM 지도 데이터 생성 후 실내 지도와 대조</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0;">
+              <div style="width:32px; display:flex; justify-content:center; flex-shrink:0;">
+                <span style="font-size:18px; color:var(--gray-400);">↓</span>
+              </div>
+              <div style="flex:1;">
+                <div class="step-box" style="background:var(--black); border-color:var(--black);">
+                  <span class="step-num" style="background:var(--white); color:var(--black);">5</span>
+                  <span class="step-text" style="color:var(--white);">목적지 도착</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 구분선 -->
+          <div style="width:1px; background:var(--gray-200); margin:0 16px; align-self:stretch;"></div>
+
+          <!-- 오른쪽: 3-1 우선순위 카드 -->
+          <div style="flex:1.4;">
+            <div class="priority-card">
+              <div class="priority-card-title">3-1. 실외 주행 시 명령 우선순위</div>
+              <div class="priority-item">
+                <span class="priority-rank">1순위</span>
+                <span>영상 입력받은 장애물 데이터</span>
+              </div>
+              <div class="priority-item">
+                <span class="priority-rank">2순위</span>
+                <span>GPS / 보도블럭 유도 OPEN CV</span>
+              </div>
+              <div class="priority-item">
+                <span class="priority-rank">3순위</span>
+                <span>카카오맵 길찾기 경로</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 차이점 -->
+        <div class="diff-section">
+          <div class="diff-title">차이점</div>
+          <div class="diff-text">
+            기존 자율주행 휠체어들은 목적지까지 개입 없이 주행하게 설계된 본 기기와 달리 고정된 장소 또는 장애물 회피 기능밖에 없습니다.<br />
+            기능 추가 시 경제성이 크게 떨어지는 반면, 본 기기는 추가 장착형이며 고가인 3D Lidar 탑재형 대비 경제성이 개선되었습니다.
+          </div>
+        </div>
+
+        <!-- 하단 네비게이션 -->
+        <div class="bottom-nav">
+          <a class="bottom-link" href="https://github.com" target="_blank" rel="noopener">
+            <img class="bottom-avatar" src="http://localhost:3845/assets/ffc263097ee46be69da42be77ee1de0cff2edd4a.png" alt="" />
+            시제품 소스코드 보러 가기
+          </a>
+          <button class="bottom-link" style="cursor:pointer; background:none;" onclick="goSlide(0)">
+            ← 메인으로
+          </button>
+          <a class="bottom-link" href="https://drive.google.com" target="_blank" rel="noopener">
+            <img class="bottom-avatar" src="http://localhost:3845/assets/cfa98e83f7a79f1c5724ecee7dda10463055b000.png" alt="" />
+            자료 보러 가기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════
+        SLIDE 3  ─  장애물 감지 헬멧 (준비중)
+  ════════════════════════════ -->
+  <section class="slide">
+    <header class="site-header">
+      <span class="site-title">Kw0n의 Github Page</span>
+      <div class="logo-area">
+        <div class="logo-badge"></div>
+        <span class="logo-text">HIPSPOT</span>
+      </div>
+    </header>
+
+    <div class="slide-body" style="padding-bottom:0;">
+      <div class="page-heading-row">
+        <div class="page-heading-left">
+          <span class="page-sub">How It Works</span>
+          <h1 class="page-heading">작동 방식</h1>
+        </div>
+        <div class="product-tags">
+          <button class="tag-pill inactive" onclick="goSlide(1)">
+            <img class="tag-icon" src="http://localhost:3845/assets/ea91d1c5bdde458c6858e3053ce53e971d23c36b.png" alt="" />
+            자율주행 휠체어
+          </button>
+          <button class="tag-pill active" onclick="goSlide(2)">
+            <img class="tag-icon" src="http://localhost:3845/assets/48bedaaa3964cd9a79739efdb7225811f13a3f7d.png" alt="" />
+            점자블럭 유도 헬멧
+          </button>
+        </div>
+      </div>
+
+      <div class="coming-soon-body">
+        <p class="coming-badge">Coming Soon</p>
+        <div class="coming-divider"></div>
+        <p class="coming-title">준비중</p>
+        <p class="coming-sub">점자블럭 유도 헬멧 콘텐츠가 곧 업데이트됩니다.</p>
+      </div>
+
+      <div class="bottom-nav" style="padding:16px 0; border-top:1px solid var(--gray-200); margin-top:auto;">
+        <a class="bottom-link" href="https://github.com" target="_blank" rel="noopener">
+          <img class="bottom-avatar" src="http://localhost:3845/assets/ffc263097ee46be69da42be77ee1de0cff2edd4a.png" alt="" />
+          시제품 소스코드 보러 가기
+        </a>
+        <button class="bottom-link" style="cursor:pointer; background:none;" onclick="goSlide(0)">
+          ← 메인으로
+        </button>
+        <a class="bottom-link" href="https://drive.google.com" target="_blank" rel="noopener">
+          <img class="bottom-avatar" src="http://localhost:3845/assets/cfa98e83f7a79f1c5724ecee7dda10463055b000.png" alt="" />
+          자료 보러 가기
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- 슬라이드 인디케이터 -->
+<div class="slide-dots" id="slideDots">
+  <div class="dot active" onclick="goSlide(0)"></div>
+  <div class="dot" onclick="goSlide(1)"></div>
+  <div class="dot" onclick="goSlide(2)"></div>
+</div>
+
+<script>
+  let current = 0;
+  const wrap = document.getElementById('slidesWrap');
+  const dots = document.querySelectorAll('.dot');
+
+  function goSlide(index) {
+    current = index;
+    wrap.style.transform = `translateX(-${current * 100}vw)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' && current < 2) goSlide(current + 1);
+    if (e.key === 'ArrowLeft'  && current > 0) goSlide(current - 1);
+  });
+
+  let startX = 0;
+  document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (dx < -50 && current < 2) goSlide(current + 1);
+    if (dx >  50 && current > 0) goSlide(current - 1);
+  });
+</script>
+</body>
+</html>
