@@ -190,6 +190,45 @@
       color: var(--black);
     }
 
+    /* ── Icon circles (replaces img avatars) ── */
+    .icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      border: 1px solid var(--gray-200);
+      background: var(--gray-50);
+      color: var(--black);
+      line-height: 1;
+    }
+    .icon-circle.sm {
+      width: 28px;
+      height: 28px;
+      font-size: 15px;
+    }
+    .icon-circle.nav {
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+    }
+    .icon-circle.btm {
+      width: 32px;
+      height: 32px;
+      font-size: 15px;
+    }
+    .icon-circle.dark {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+    .product-pill:hover .icon-circle { background: var(--gray-600); border-color: var(--gray-600); color: var(--white); }
+    .tag-pill.active .icon-circle { background: var(--gray-600); border-color: transparent; color: var(--white); }
+    .tag-pill.inactive .icon-circle.sm { background: var(--gray-50); }
+
     /* ─────────────────────────────────────
        PAGE 2  ─  작동 방식 (자율주행 휠체어)
     ───────────────────────────────────── */
@@ -521,11 +560,11 @@
       <!-- 제품 카테고리 -->
       <div class="p1-products">
         <button class="product-pill" onclick="goSlide(1)">
-          <img class="pill-icon" src="http://localhost:3845/assets/ea91d1c5bdde458c6858e3053ce53e971d23c36b.png" alt="자율주행 휠체어 아이콘" />
+          <span class="icon-circle" aria-hidden="true">♿</span>
           자율주행 휠체어
         </button>
         <button class="product-pill" onclick="goSlide(2)">
-          <img class="pill-icon" src="http://localhost:3845/assets/48bedaaa3964cd9a79739efdb7225811f13a3f7d.png" alt="장애물 감지 헬멧 아이콘" />
+          <span class="icon-circle" aria-hidden="true">⛑️</span>
           장애물 감지 헬멧
         </button>
       </div>
@@ -535,18 +574,18 @@
       <p class="p1-links-title">바로 가기</p>
 
       <div class="p1-links">
-        <a class="nav-link-row" href="https://github.com" target="_blank" rel="noopener">
-          <img class="nav-avatar" src="http://localhost:3845/assets/ffc263097ee46be69da42be77ee1de0cff2edd4a.png" alt="GitHub 아이콘" />
+        <a class="nav-link-row" href="https://github.com/linda1476" target="_blank" rel="noopener">
+          <span class="icon-circle nav" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
           <span class="nav-link-label">시제품 소스코드 보러 가기</span>
           <span class="nav-arrow">→</span>
         </a>
         <a class="nav-link-row" href="#" onclick="goSlide(1);return false;">
-          <img class="nav-avatar" src="http://localhost:3845/assets/b731281327bd918416d03beb05df41e848fbe000.png" alt="작동방식 아이콘" />
+          <span class="icon-circle nav" aria-hidden="true">⚙️</span>
           <span class="nav-link-label">작동방식 보러 가기</span>
           <span class="nav-arrow">→</span>
         </a>
         <a class="nav-link-row" href="https://drive.google.com" target="_blank" rel="noopener">
-          <img class="nav-avatar" src="http://localhost:3845/assets/cfa98e83f7a79f1c5724ecee7dda10463055b000.png" alt="Google Drive 아이콘" />
+          <span class="icon-circle nav" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 87.3 78" fill="none"><path d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L38 57.5H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="M43.65 20.5L29.35 44.85 4.8 0C3.45.8 2.3 1.9 1.5 3.3L1.2 3.8C.4 5.2 0 6.75 0 8.3V57.5h38l18-31.2z" fill="#00ac47"/><path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H49.3l7.9 16.9z" fill="#ea4335"/><path d="M43.65 20.5L57.95 44.85l-8.65 14.95H38L43.65 20.5z" fill="#00832d"/><path d="M80.55 27.5l-3.85-6.65c-.8-1.4-1.95-2.5-3.3-3.3L43.65 20.5 57.95 44.85h29.35V26.85c0-1.55-.4-3.1-1.2-4.5z" fill="#2684fc"/><path d="M49.3 57.5H38L57.95 44.85 49.3 57.5z" fill="#00ac47"/><path d="M73.4 17.55L43.65 20.5 29.35 44.85l19.95 12.65L73.4 17.55z" fill="none"/><path d="M73.4 17.55c-1.35-.8-2.9-1.25-4.5-1.25H18.4c-1.6 0-3.15.45-4.5 1.25l29.75 3z" fill="#ffba00"/></svg></span>
           <span class="nav-link-label">자료 보러 가기</span>
           <span class="nav-arrow">→</span>
         </a>
@@ -574,11 +613,11 @@
         </div>
         <div class="product-tags">
           <button class="tag-pill active" onclick="goSlide(1)">
-            <img class="tag-icon" src="http://localhost:3845/assets/ea91d1c5bdde458c6858e3053ce53e971d23c36b.png" alt="" />
+            <span class="icon-circle sm" aria-hidden="true">♿</span>
             자율주행 휠체어
           </button>
           <button class="tag-pill inactive" onclick="goSlide(2)">
-            <img class="tag-icon" src="http://localhost:3845/assets/48bedaaa3964cd9a79739efdb7225811f13a3f7d.png" alt="" />
+            <span class="icon-circle sm" aria-hidden="true">⛑️</span>
             점자블럭 유도 헬멧
           </button>
         </div>
@@ -672,15 +711,15 @@
 
         <!-- 하단 네비게이션 -->
         <div class="bottom-nav">
-          <a class="bottom-link" href="https://github.com" target="_blank" rel="noopener">
-            <img class="bottom-avatar" src="http://localhost:3845/assets/ffc263097ee46be69da42be77ee1de0cff2edd4a.png" alt="" />
+          <a class="bottom-link" href="https://github.com/linda1476" target="_blank" rel="noopener">
+            <span class="icon-circle btm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
             시제품 소스코드 보러 가기
           </a>
           <button class="bottom-link" style="cursor:pointer; background:none;" onclick="goSlide(0)">
             ← 메인으로
           </button>
           <a class="bottom-link" href="https://drive.google.com" target="_blank" rel="noopener">
-            <img class="bottom-avatar" src="http://localhost:3845/assets/cfa98e83f7a79f1c5724ecee7dda10463055b000.png" alt="" />
+            <span class="icon-circle btm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 87.3 78" fill="none"><path d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L38 57.5H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="M43.65 20.5L29.35 44.85 4.8 0C3.45.8 2.3 1.9 1.5 3.3L1.2 3.8C.4 5.2 0 6.75 0 8.3V57.5h38l18-31.2z" fill="#00ac47"/><path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H49.3l7.9 16.9z" fill="#ea4335"/><path d="M43.65 20.5L57.95 44.85l-8.65 14.95H38L43.65 20.5z" fill="#00832d"/><path d="M80.55 27.5l-3.85-6.65c-.8-1.4-1.95-2.5-3.3-3.3L43.65 20.5 57.95 44.85h29.35V26.85c0-1.55-.4-3.1-1.2-4.5z" fill="#2684fc"/><path d="M49.3 57.5H38L57.95 44.85 49.3 57.5z" fill="#00ac47"/><path d="M73.4 17.55L43.65 20.5 29.35 44.85l19.95 12.65L73.4 17.55z" fill="none"/><path d="M73.4 17.55c-1.35-.8-2.9-1.25-4.5-1.25H18.4c-1.6 0-3.15.45-4.5 1.25l29.75 3z" fill="#ffba00"/></svg></span>
             자료 보러 가기
           </a>
         </div>
@@ -708,11 +747,11 @@
         </div>
         <div class="product-tags">
           <button class="tag-pill inactive" onclick="goSlide(1)">
-            <img class="tag-icon" src="http://localhost:3845/assets/ea91d1c5bdde458c6858e3053ce53e971d23c36b.png" alt="" />
+            <span class="icon-circle sm" aria-hidden="true">♿</span>
             자율주행 휠체어
           </button>
           <button class="tag-pill active" onclick="goSlide(2)">
-            <img class="tag-icon" src="http://localhost:3845/assets/48bedaaa3964cd9a79739efdb7225811f13a3f7d.png" alt="" />
+            <span class="icon-circle sm" aria-hidden="true">⛑️</span>
             점자블럭 유도 헬멧
           </button>
         </div>
@@ -726,15 +765,15 @@
       </div>
 
       <div class="bottom-nav" style="padding:16px 0; border-top:1px solid var(--gray-200); margin-top:auto;">
-        <a class="bottom-link" href="https://github.com" target="_blank" rel="noopener">
-          <img class="bottom-avatar" src="http://localhost:3845/assets/ffc263097ee46be69da42be77ee1de0cff2edd4a.png" alt="" />
+        <a class="bottom-link" href="https://github.com/linda1476" target="_blank" rel="noopener">
+          <span class="icon-circle btm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
           시제품 소스코드 보러 가기
         </a>
         <button class="bottom-link" style="cursor:pointer; background:none;" onclick="goSlide(0)">
           ← 메인으로
         </button>
         <a class="bottom-link" href="https://drive.google.com" target="_blank" rel="noopener">
-          <img class="bottom-avatar" src="http://localhost:3845/assets/cfa98e83f7a79f1c5724ecee7dda10463055b000.png" alt="" />
+          <span class="icon-circle btm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 87.3 78" fill="none"><path d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L38 57.5H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="M43.65 20.5L29.35 44.85 4.8 0C3.45.8 2.3 1.9 1.5 3.3L1.2 3.8C.4 5.2 0 6.75 0 8.3V57.5h38l18-31.2z" fill="#00ac47"/><path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H49.3l7.9 16.9z" fill="#ea4335"/><path d="M43.65 20.5L57.95 44.85l-8.65 14.95H38L43.65 20.5z" fill="#00832d"/><path d="M80.55 27.5l-3.85-6.65c-.8-1.4-1.95-2.5-3.3-3.3L43.65 20.5 57.95 44.85h29.35V26.85c0-1.55-.4-3.1-1.2-4.5z" fill="#2684fc"/><path d="M49.3 57.5H38L57.95 44.85 49.3 57.5z" fill="#00ac47"/><path d="M73.4 17.55L43.65 20.5 29.35 44.85l19.95 12.65L73.4 17.55z" fill="none"/><path d="M73.4 17.55c-1.35-.8-2.9-1.25-4.5-1.25H18.4c-1.6 0-3.15.45-4.5 1.25l29.75 3z" fill="#ffba00"/></svg></span>
           자료 보러 가기
         </a>
       </div>
