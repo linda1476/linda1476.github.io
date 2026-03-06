@@ -826,10 +826,10 @@
   }
 
   async function dSend() {
-    const apiKey = window.DEMO_API_KEY?.replace('sk-or-v1-', '') ? window.DEMO_API_KEY : document.getElementById('dApiKey')?.value.trim() || '';
+    const apiKey = window.DEMO_API_KEY || document.getElementById('dApiKey')?.value.trim() || '';
     const model  = document.getElementById('dModel').value.trim();
     if (!apiKey) { alert('OpenRouter API Key를 입력해주세요.'); return; }
-    if (!window.DEMO_API_KEY?.startsWith('sk-or-')) localStorage.setItem('dApiKey', apiKey);
+    if (!window.DEMO_API_KEY && apiKey) localStorage.setItem('dApiKey', apiKey);
 
     const btn = document.getElementById('dSendBtn');
     btn.disabled = true;
@@ -856,7 +856,11 @@
           max_tokens: 512
         })
       });
-      if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e?.error?.message || `HTTP ${res.status}`); }
+      if (!res.ok) { 
+        const e = await res.json().catch(()=>({})); 
+        const errMsg = e?.error?.message || e?.message || `HTTP ${res.status}`;
+        throw new Error(errMsg); 
+      }
       const data = await res.json();
       const content = data.choices?.[0]?.message?.content ?? '(응답 없음)';
       dSetStatus('ok', `완료 · ${data.usage?.completion_tokens ?? '?'} tokens`);
