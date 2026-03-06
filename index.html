@@ -217,56 +217,56 @@
       footer { padding: 30px 24px; }
       .hero-title { letter-spacing: -2px; }
       .links-row { flex-direction: column; }
+      .ai-voice-section { padding: 80px 24px; }
+      .ai-vc { flex-direction: column; text-align: center; gap: 8px; }
+      .ai-vc-result { text-align: center; }
     }
 
     /* AI VOICE CALLOUT */
     .ai-voice-section {
       background: var(--black); color: var(--white);
-      padding: 110px 48px; text-align: center;
+      padding: 110px 48px;
     }
     .ai-voice-inner { max-width: 860px; margin: 0 auto; }
     .ai-voice-badge {
       display: inline-flex; align-items: center; gap: 7px;
-      padding: 6px 16px; background: rgba(255,255,255,.1); border-radius: 999px;
-      font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-      color: rgba(255,255,255,.55); margin-bottom: 28px;
+      padding: 6px 16px; background: rgba(255,255,255,.08); border-radius: 999px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,.4); margin-bottom: 28px;
     }
     .ai-voice-title {
-      font-size: clamp(36px, 5.5vw, 76px);
-      font-weight: 900; letter-spacing: -3px; line-height: 1.05;
-      color: var(--white); margin-bottom: 24px;
+      font-family: var(--font-en);
+      font-size: clamp(38px, 5.5vw, 72px);
+      font-weight: 700; letter-spacing: -3px; line-height: 1.05;
+      color: var(--white); margin-bottom: 22px;
     }
     .ai-voice-title em { font-style: normal; color: var(--accent); }
     .ai-voice-desc {
-      font-size: 18px; color: rgba(255,255,255,.58); line-height: 1.9;
-      max-width: 700px; margin: 0 auto 52px;
+      font-size: 17px; color: rgba(255,255,255,.5); line-height: 1.85;
+      max-width: 640px; margin-bottom: 52px;
     }
-    .ai-voice-desc strong { color: var(--white); }
+    .ai-voice-desc strong { color: rgba(255,255,255,.88); font-weight: 500; }
     .ai-voice-cards {
-      display: flex; flex-direction: column; gap: 12px;
-      max-width: 660px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 10px;
+      max-width: 640px;
     }
     .ai-vc {
-      display: flex; align-items: center; gap: 16px;
-      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10);
-      border-radius: 16px; padding: 20px 28px; text-align: left;
-      transition: background .25s, border-color .25s;
+      display: grid; grid-template-columns: 1fr auto 1.3fr;
+      align-items: center; gap: 16px;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 18px 24px;
+      transition: background .2s;
     }
-    .ai-vc:hover { background: rgba(255,255,255,.08); border-color: rgba(0,87,255,.45); }
-    .ai-vc-quote { flex: 1; font-size: 15px; color: rgba(255,255,255,.5); font-style: italic; }
-    .ai-vc-arrow { font-size: 20px; color: var(--accent); font-weight: 700; flex-shrink: 0; }
-    .ai-vc-result { flex: 1.4; font-size: 14px; color: var(--white); font-weight: 600; text-align: right; }
-    .ai-voice-foot {
-      margin-top: 44px; padding: 24px 32px;
-      background: rgba(0,87,255,.18); border: 1px solid rgba(0,87,255,.35);
-      border-radius: 16px; font-size: 16px; color: var(--white);
-      line-height: 1.75; max-width: 660px; margin-left: auto; margin-right: auto;
+    .ai-vc:hover { background: rgba(255,255,255,.07); }
+    .ai-vc-quote { font-size: 14px; color: rgba(255,255,255,.45); font-style: italic; }
+    .ai-vc-arrow { font-size: 16px; color: rgba(255,255,255,.2); }
+    .ai-vc-result { font-size: 13px; color: rgba(255,255,255,.7); font-weight: 600; text-align: right; }
+    .ai-voice-note {
+      margin-top: 40px; max-width: 640px;
+      padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1);
+      font-size: 14px; color: rgba(255,255,255,.35); line-height: 1.7;
     }
-    @media (max-width: 900px) {
-      .ai-voice-section { padding: 80px 24px; }
-      .ai-vc { flex-direction: column; text-align: center; gap: 8px; }
-      .ai-vc-result { text-align: center; }
-    }
+    .ai-voice-note strong { color: rgba(255,255,255,.6); font-weight: 500; }
   </style>
 </head>
 <body>
@@ -313,19 +313,21 @@
 <!-- AI VOICE CALLOUT -->
 <section class="ai-voice-section">
   <div class="ai-voice-inner fade-up">
-    <div class="ai-voice-badge">🎤 AI 자연어 제어</div>
-    <h2 class="ai-voice-title">"편의점 가줘" 한 마디면<br/><em>충분합니다</em></h2>
+    <div class="ai-voice-badge">AI Natural Language Input</div>
+    <h2 class="ai-voice-title">말하면<br/><em>움직입니다.</em></h2>
     <p class="ai-voice-desc">
-      버튼을 누르거나 정확한 명령어를 기억할 필요가 없습니다.<br/>
-      <strong>조종이 어려운 분도 자연스럽게 말만 하면,
-      AI가 대화 문맥에서 목적지·방향·이동 의도를 자동으로 추출해 즉시 실행합니다.</strong><br/>
-      손·팔의 거동이 불편한 분, 터치 UI 조작이 힘든 분 모두 — 말 한 마디로 자유로운 이동이 가능합니다.
+      버튼 위치를 외우거나 정확한 명령 구조를 익힐 필요 없습니다.<br/>
+      <strong>AI가 발화 내용에서 목적지·방향·이동 의도를 추출해 즉시 실행합니다.</strong><br/>
+      손·팔의 움직임이 제한된 사용자도 평소처럼 말하는 것만으로 이동할 수 있습니다.
+    </p>
+    <p class="ai-voice-note">
+      🚀 신체의 불편함과 무관하게 누구나 동등하게 이동할 권리를 실제로 실현합니다.
     </p>
     <div class="ai-voice-cards">
       <div class="ai-vc">
-        <span class="ai-vc-quote">"저기 병원 앞에 내려줘"</span>
+        <span class="ai-vc-quote">"저기 편의점 앞에 내려줘"</span>
         <span class="ai-vc-arrow">→</span>
-        <span class="ai-vc-result">병원 경로 자동 생성 · 주행 시작</span>
+        <span class="ai-vc-result">주변 편의점 검색 · 경로 생성 · 주행 시작</span>
       </div>
       <div class="ai-vc">
         <span class="ai-vc-quote">"집에 가고 싶어"</span>
@@ -333,13 +335,10 @@
         <span class="ai-vc-result">저장된 자택 주소로 즉시 출발</span>
       </div>
       <div class="ai-vc">
-        <span class="ai-vc-quote">"조금만 왼쪽으로 틀어줘"</span>
+        <span class="ai-vc-quote">"조금만 오른쪽으로 틀어줘"</span>
         <span class="ai-vc-arrow">→</span>
-        <span class="ai-vc-result">문맥 파악 → 방향 조정 즉시 실행</span>
+        <span class="ai-vc-result">문맥 파악 · 방향 보정 실행</span>
       </div>
-    </div>
-    <div class="ai-voice-foot">
-      🚀 &nbsp;조종 능력과 무관하게 누구나 동등하게 이동할 권리 — AutoDrive가 목소리만으로 그 권리를 실현합니다.
     </div>
   </div>
 </section>
@@ -361,7 +360,7 @@
     <a href="#helmet" class="product-card">
       <span class="product-icon">⛑️</span>
       <h3>점자블럭 유도 헬멧</h3>
-      <p>점자블럭을 카메라로 인식하고 시각·청각 피드백으로 보행자를 안전하게 유도하는 웨어러블 헬멧입니다.</p>
+      <p>점자블럭을 카메라로 인식하고 시각·청각 피드백으로 시각장애 보행자를 안전하게 유도하는 웨어러블 헬멧입니다.</p>
       <span class="product-badge badge-soon">준비 중</span>
     </a>
   </div>
@@ -379,8 +378,8 @@
     <div class="step-item">
       <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
       <div class="step-right">
-        <h4>목적지 입력 — 말만 하세요</h4>
-        <p>UI 터치 또는 자연어 음성 명령으로 목적지를 입력합니다. 정확한 명령어가 아니어도 됩니다. AI가 대화 문맥을 분석해 목적지·이동 의도를 자동 추출하므로, <strong>조종이 어려운 분도 평소 말하듯 이야기하면 시스템이 알아서 경로를 생성하고 주행을 시작합니다.</strong></p>
+        <h4>목적지 입력</h4>
+        <p>UI 터치 또는 자연어 음성으로 목적지를 입력합니다. AI가 발화 문맥을 분석해 목적지·이동 의도를 자동 추출하므로, 정확한 명령 구조 없이도 평소 말하듯 이야기하면 됩니다.</p>
         <span class="sub-tag">UI / 음성 인식 · AI 문맥 추출 (클라우드)</span>
       </div>
     </div>
