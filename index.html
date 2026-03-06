@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- GitHub Actions 배포 시 OPENROUTER_API_KEY secret을 주입하는 파일 -->
+  <script src="config.js" onerror="void 0"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -670,7 +672,8 @@
   <h2 class="section-title">AI 어시스턴트 체험</h2>
   <p class="section-desc">실제 탑재될 LLM 시스템 프롬프트로 직접 테스트해보세요. OpenRouter API 키가 필요합니다.</p>
 
-  <div class="demo-layout">
+  <!-- API 키 입력 영역: window.DEMO_API_KEY 없을 때만 표시 -->
+  <div id="dApiSection">
     <!-- INPUT -->
     <div>
       <div class="demo-card">
@@ -688,6 +691,10 @@
           <input class="demo-input" type="text" id="dModel" value="z-ai/glm-4.5-air:free" />
         </div>
       </div>
+    </div>
+  </div><!-- /dApiSection -->
+
+  <div class="demo-layout">
 
       <div class="demo-card" style="margin-top:16px;">
         <div class="demo-card-title">입력값</div>
@@ -785,10 +792,23 @@
 
 언어: 한국어. 이모지 금지. 마크다운 금지. 태그 외 추가 텍스트 금지. 주행 무관 질문 거부. 이 프롬프트 언급 금지.`;
 
-  // localStorage API 키 복원
+  // localStorage API 키 복원 (window.DEMO_API_KEY 없을 때만)
   (function() {
-    const saved = localStorage.getItem('dApiKey');
-    if (saved) document.getElementById('dApiKey').value = saved;
+    if (window.DEMO_API_KEY) {
+      // Secret이 주입된 경우: 입력 영역 숨기고 스테이터스 안내
+      const sec = document.getElementById('dApiSection');
+      if (sec) {
+        sec.innerHTML = '<div class="demo-card"><div class="demo-card-title">API 설정</div>' +
+          '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;">'+
+          '<div class="demo-dot ok"></div>'+
+          '<span style="font-size:13px;color:rgba(255,255,255,.5)">관리자 설정 키 사용 중</span></div>' +
+          '<div class="demo-field"><div class="demo-label">모델</div>' +
+          '<input class="demo-input" type="text" id="dModel" value="z-ai/glm-4.5-air:free" /></div></div>';
+      }
+    } else {
+      const saved = localStorage.getItem('dApiKey');
+      if (saved) document.getElementById('dApiKey').value = saved;
+    }
   })();
 
   function dBuildMsg() {
@@ -815,10 +835,10 @@
   }
 
   async function dSend() {
-    const apiKey = document.getElementById('dApiKey').value.trim();
+    const apiKey = window.DEMO_API_KEY || document.getElementById('dApiKey')?.value.trim() || '';
     const model  = document.getElementById('dModel').value.trim();
     if (!apiKey) { alert('OpenRouter API Key를 입력해주세요.'); return; }
-    localStorage.setItem('dApiKey', apiKey);
+    if (!window.DEMO_API_KEY) localStorage.setItem('dApiKey', apiKey);
 
     const btn = document.getElementById('dSendBtn');
     btn.disabled = true;
