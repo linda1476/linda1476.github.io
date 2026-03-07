@@ -360,12 +360,12 @@
     AutoDrive
   </a>
   <ul class="nav-links">
-    <li><a href="#products">제품</a></li>
+    <li><a href="#products">작품</a></li>
     <li><a href="#how">작동 방식</a></li>
     <li><a href="#tech">기술</a></li>
     <li><a href="#diff">차이점</a></li>
     <li><a href="#links">자료</a></li>
-    <li><a href="#demo">AI 체험</a></li>
+    <li><a href="#demo">실제 AI 체험</a></li>
   </ul>
   <div class="nav-cta">
     <a href="https://github.com/linda1476/kick" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
@@ -396,21 +396,21 @@
 <!-- AI VOICE CALLOUT -->
 <section class="ai-voice-section">
   <div class="ai-voice-inner fade-up">
-    <div class="ai-voice-badge">AI Natural Language Input</div>
-    <h2 class="ai-voice-title">말하면<br/><em>움직입니다.</em></h2>
+    <div class="ai-voice-badge">AI 자연어 명령 입력</div>
+    <h2 class="ai-voice-title">그냥 말하면<br/><em>알아서 움직입니다.</em></h2>
     <p class="ai-voice-desc">
       버튼 위치를 외우거나 정확한 명령 구조를 익힐 필요 없습니다.<br/>
-      <strong>AI가 발화 내용에서 목적지·방향·이동 의도를 추출해 즉시 실행합니다.</strong><br/>
+      <strong>AI가 사용자가 입력한 내용에서 목적지·방향·이동 의도를 추출해 즉시 실행합니다.</strong><br/>
       손·팔의 움직임이 제한된 사용자도 평소처럼 말하는 것만으로 이동할 수 있습니다.
     </p>
     <p class="ai-voice-note">
-      🚀 신체의 불편함과 무관하게 누구나 동등하게 이동할 권리를 실제로 실현합니다.
+      신체의 불편함과 무관하게 누구나 동등하게 이동할 권리를 실제로 실현합니다.
     </p>
     <div class="ai-voice-cards">
       <div class="ai-vc">
         <span class="ai-vc-quote">"저기 편의점 앞에 내려줘"</span>
         <span class="ai-vc-arrow">→</span>
-        <span class="ai-vc-result">주변 편의점 검색 · 경로 생성 · 주행 시작</span>
+        <span class="ai-vc-result">주변 편의점 검색 · 도보주행 경로 생성 · 주행 시작</span>
       </div>
       <div class="ai-vc">
         <span class="ai-vc-quote">"집에 가고 싶어"</span>
@@ -430,9 +430,9 @@
 
 <!-- PRODUCTS -->
 <section id="products" class="fade-up">
-  <div class="section-label">Products</div>
-  <h2 class="section-title">두 가지 제품</h2>
-  <p class="section-desc">이동 약자의 자립 이동을 돕는 두 가지 보조기기를 개발 중입니다.</p>
+  <div class="section-label">작품들</div>
+  <h2 class="section-title">두 가지 작품</h2>
+  <p class="section-desc">자율주행 휠체어와 점자블럭 유도 헬멧을 구상/개발중입니다. </p>
   <div class="products-grid">
     <a href="#how" class="product-card">
       <span class="product-icon">♿</span>
@@ -453,7 +453,7 @@
 
 <!-- HOW IT WORKS -->
 <section id="how" class="fade-up">
-  <div class="section-label">How It Works</div>
+  <div class="section-label">어떻게 작동하나요?</div>
   <h2 class="section-title">작동 방식</h2>
   <p class="section-desc">음성 또는 UI로 목적지를 입력하면, 실외·실내 환경에 맞춰 자동으로 판단하며 주행합니다.</p>
 
@@ -486,7 +486,7 @@
       <div class="step-left"><div class="step-circle">4</div><div class="step-line"></div></div>
       <div class="step-right">
         <h4>실내 진입 시 자동 전환</h4>
-        <p>실내 진입이 감지되면 라이다 우선·카메라(SLAM) 보조 모드로 전환해 실내 위치를 파악하고 경로를 추종합니다.</p>
+        <p>실내 진입이 감지되면 라이다 우선·카메라(SLAM) 보조 모드로 전환해 2D 실내 지도와 대조하여 실내 위치를 파악하고 경로를 추종합니다.</p>
         <span class="sub-tag">2D Lidar 우선 · SLAM 보조</span>
       </div>
     </div>
@@ -505,13 +505,13 @@
       <h5>실외 주행 — 명령 우선순위</h5>
       <div class="p-item"><span class="p-rank">1순위</span><span>카메라 데이터 (Depth · 장애물 감지 · 우회 판별)</span></div>
       <div class="p-item"><span class="p-rank">2순위</span><span>라이다 데이터 (실제 장애물 거리 측정)</span></div>
-      <div class="p-item"><span class="p-rank">3순위</span><span>GPS — Tmap 경로안내 API</span></div>
+      <div class="p-item"><span class="p-rank">3순위</span><span>GPS — Tmap 보도 경로안내 API</span></div>
     </div>
     <div class="priority-box">
       <h5>실내 주행 — 명령 우선순위</h5>
       <div class="p-item"><span class="p-rank">1순위</span><span>라이다 데이터 (실내 장애물 거리)</span></div>
       <div class="p-item"><span class="p-rank">2순위</span><span>카메라 데이터 (SLAM 위치 보정)</span></div>
-      <div class="p-item"><span class="p-rank">3순위</span><span>GPS 측위</span></div>
+      <div class="p-item"><span class="p-rank">3순위</span><span>GPS 미사용</span></div>
     </div>
   </div>
 </section>
@@ -520,7 +520,7 @@
 
 <!-- TECH STACK -->
 <section id="tech">
-  <div class="section-label">Technology</div>
+  <div class="section-label">사용한 기술목록</div>
   <h2 class="section-title">기술별 주요 기능</h2>
   <p class="section-desc">각 센서와 소프트웨어가 분담하는 역할을 기술별로 정리했습니다.</p>
   <div class="tech-grid">
@@ -530,11 +530,11 @@
       <ul>
         <li>YOLO26n 실시간 객체 감지 (장애물·사람·신호 등)</li>
         <li>Depth Anything V2 — 단안 카메라 거리 추정</li>
-        <li>SLAM — 실내 지도 생성 및 자기 위치 추정</li>
+        <li>SLAM — 실내 지도 생성 및 2D 지도와 대조하여 자기 위치 추정</li>
         <li>실외 1순위 / 실내 2순위 센서</li>
         <li>Jetson Orin Nano에서 TRT FP16 최적화</li>
       </ul>
-      <span class="tech-card-tag">Python · OpenCV · PyTorch · Ultralytics</span>
+      <span class="tech-card-tag">Python / PyTorch · OpenCV · Ultralytics</span>
     </div>
     <div class="tech-card">
       <span class="tech-card-icon">📡</span>
@@ -545,7 +545,7 @@
         <li>카메라 오감지 보완 역할</li>
         <li>저가 2D Lidar로 3D Lidar 대비 경제성 개선</li>
       </ul>
-      <span class="tech-card-tag">Serial · 직접 드라이버</span>
+      <span class="tech-card-tag">유선연결 · USB</span>
     </div>
     <div class="tech-card">
       <span class="tech-card-icon">🗺️</span>
@@ -556,65 +556,65 @@
         <li>카메라/라이다 감지 없으면 GPS 경로 주행</li>
         <li>실외 3순위 명령 소스</li>
       </ul>
-      <span class="tech-card-tag">Tmap API · HTTP REST</span>
+      <span class="tech-card-tag">Tmap API · LTE/5G 이동통신망</span>
     </div>
     <div class="tech-card">
       <span class="tech-card-icon">🎤</span>
       <h3>음성 인식</h3>
       <ul>
         <li>고정형 마이크로 음성 입력 수집</li>
-        <li>클라우드 서버에서 STT 처리 후 텍스트 반환</li>
-        <li>음성으로 목적지 입력, 주행 명령 수행</li>
+        <li>클라우드 서버 / 로컬에서 STT(Sound To Text) 처리 후 텍스트 반환</li>
+        <li>클라우드 LLM (Claude hakiu 4.5) / 온디바이스 Ai (EXAONE 4.0 1.2B)중 택1하여 변환한 텍스트에서 필요한 정보를 추출후 답변 반환</li>
+        <li>반환된 답변으로 목적지 입력, 주행 명령 수행</li>
       </ul>
-      <span class="tech-card-tag">Cloud STT · requests</span>
+      <span class="tech-card-tag">Cloud STT · LTE/5G 이동통신망</span>
     </div>
     <div class="tech-card">
       <span class="tech-card-icon">🚨</span>
-      <h3>IMU / 자이로센서</h3>
+      <h3>안전장치</h3>
       <ul>
-        <li>큰 충격 또는 이상 기울기 실시간 감지</li>
-        <li>15초 내 탑승자 미반응 → 119 자동 신고</li>
-        <li>핸드 리모트 · 브레이크로 수동 개입</li>
-        <li>시스템 오작동 시에도 탑승자 제어 가능</li>
+        <li>자이로 센서를 통해 이상 기울기 실시간 감지</li>
+        <li>감지후 15초 내 탑승자 미반응 → 보호자에게 알림</li>
+        <li>물리적 제어 중단버튼으로 수동 개입</li>
+        <li>사용자의 조작이 제어 1순위라 수동개입시 탑승자가 제어가 가능합니다</li>
       </ul>
-      <span class="tech-card-tag">IMU · Serial · Emergency API</span>
+      <span class="tech-card-tag">자이로센서 · 유선연결 · LTE/5G 이동통신망</span>
     </div>
     <div class="tech-card">
       <span class="tech-card-icon">🖥️</span>
       <h3>UI &amp; 제어 소프트웨어</h3>
       <ul>
-        <li>Tkinter 기반 제어 콘솔 (지도 · 목적지 · 상태)</li>
-        <li>Jetson Orin Nano 8GB 멀티스레드 통합 실행</li>
-        <li>YOLO TRT 엔진 ~40fps / Depth TRT ~15fps</li>
-        <li>ONNX / TensorRT FP16 자동 변환 지원</li>
+        <li>Python/Tkinter 기반 제어 콘솔 (지도 · 목적지 · 상태)</li>
+        <li>Jetson Orin Nano 8GB(소형기기)환경에 최적화한 오픈소스 엔진</li>
+        <li>객체감지 프로그램 ~40fps / 단안 카메라 거리추정 프로그램 ~15fps</li>
+        <li>TensorRT 최적화 지원</li>
       </ul>
-      <span class="tech-card-tag">Tkinter · Threading · TensorRT · ONNX</span>
+      <span class="tech-card-tag">Tkinter · Threading · TensorRT </span>
     </div>
-  </div>
 </section>
 
 <div class="divider" style="background:rgba(255,255,255,.08);"></div>
 
 <!-- DIFFERENCE -->
 <section id="diff" class="fade-up">
-  <div class="section-label">Differentiation</div>
+  <div class="section-label">한걸음 더 나아간.</div>
   <h2 class="section-title">기존 제품과의 차이점</h2>
-  <p class="section-desc">기존 자율주행 휠체어와 세 가지 관점에서 비교합니다.</p>
+  <p class="section-desc">기존 자율주행 이동장치와 세 가지 관점에서 비교합니다.</p>
   <div class="diff-grid">
     <div class="diff-card">
       <div class="diff-card-num">01 — 경제성</div>
       <h4>3D Lidar 없이도 동작</h4>
-      <p>고가의 3D Lidar 대신 카메라(Depth·SLAM)와 저가 2D Lidar를 조합해 동등한 장애물 회피 성능을 달성했습니다.</p>
+      <p>고가의 3D Lidar 대신 카메라(Depth·SLAM)와 비교적 저가인 2D Lidar를 조합해 동등한 장애물 회피 성능을 달성했습니다.</p>
     </div>
     <div class="diff-card">
       <div class="diff-card-num">02 — 완전 자율주행</div>
       <h4>목적지까지 개입 없이</h4>
-      <p>기존 제품은 고정 장소 이동 또는 단순 장애물 회피에 그쳤지만, 본 기기는 실외·실내를 막론하고 목적지까지 완전 자율 주행합니다.</p>
+      <p>기존 제품은 고정된 장소 이동 또는 단순 장애물 회피에 그쳤지만, 본 기기는 장소에 상관없이 처음가보는 장소라도 목적지까지 완전 자율 주행합니다.</p>
     </div>
     <div class="diff-card">
       <div class="diff-card-num">03 — 추가 장착형</div>
       <h4>기존 휠체어에 탈부착</h4>
-      <p>새 휠체어를 구입할 필요 없이 기존 수동·전동 휠체어에 모듈을 장착하는 방식으로 도입 비용을 낮췄습니다.</p>
+      <p>새 휠체어를 구입할 필요 없이 기존 수동 휠체어에 추가 모듈을 장착하는 방식으로 제작 비용을 낮췄습니다.</p>
     </div>
   </div>
 </section>
@@ -624,11 +624,11 @@
 <!-- HELMET COMING SOON -->
 <section id="helmet">
   <div class="helmet-left fade-up">
-    <span class="coming-pill">Coming Soon</span>
+    <span class="coming-pill">이건 다른 공모전에 출품할 작품입니다. 교내대회와는 별개의 작품입니다.</span>
     <div class="section-label">Product 2</div>
     <h2 class="section-title">점자블럭 유도 헬멧</h2>
     <p class="section-desc" style="margin-bottom:28px;">
-      점자블럭을 카메라로 감지하고 진동·음성 피드백으로 시각장애인을 안전하게 유도하는 웨어러블 헬멧입니다. 현재 설계 및 개발 준비 중입니다.
+      점자블럭을 카메라로 감지하고 진동·음성 피드백으로 시각장애인을 안전하게 유도하는 웨어러블 헬멧입니다.
     </p>
     <a href="https://github.com/linda1476" target="_blank" rel="noopener" class="btn btn-outline">GitHub 보기</a>
   </div>
@@ -653,7 +653,7 @@
     </a>
     <a class="link-card" href="https://drive.google.com/drive/folders/1r-QkwxaMqtzG1tnD8i3AZww0HDTQ2pkr?usp=sharing" target="_blank" rel="noopener">
       <div class="link-icon">📁</div>
-      <div class="link-text"><h4>설계 자료 (Google Drive)</h4><p>SLAM · Depth 설계 문서, 데이터셋 링크</p></div>
+      <div class="link-text"><h4>실제 작동 시연/ 설계 자료 (Google Drive)</h4><p>SLAM · Depth</p></div>
     </a>
     <a class="link-card" href="https://kw0n.me" target="_blank" rel="noopener">
       <div class="link-icon">🌐</div>
@@ -666,9 +666,9 @@
 
 <!-- AI DEMO -->
 <section id="demo">
-  <div class="section-label">Live Demo</div>
+  <div class="section-label">시스템에 탑재되는 ai를 직접 체험해보세요!</div>
   <h2 class="section-title">AI 어시스턴트 체험</h2>
-  <p class="section-desc">실제 탑재될 LLM 시스템 프롬프트로 직접 테스트해보세요. OpenRouter API 키가 필요합니다.</p>
+  <p class="section-desc">실제 탑재될 LLM 시스템 프롬프트로 직접 테스트해보세요. OpenRouter(무료 ai api제공처) API 키가 필요합니다.</p>
 
   <div class="demo-layout">
     <!-- INPUT -->
@@ -681,10 +681,10 @@
             <input class="demo-input" type="password" id="dApiKey" placeholder="sk-or-v1-..." />
             <button class="demo-toggle" onclick="dToggleKey()">표시</button>
           </div>
-          <p class="demo-api-notice">키는 브라우저 localStorage에만 저장되며 외부로 전송되지 않습니다.</p>
+          <p class="demo-api-notice">키는 기기에만 저장되며 외부로 전송되지 않습니다.</p>
         </div>
         <div class="demo-field">
-          <div class="demo-label">모델</div>
+          <div class="demo-label">모델(변경하지 말아주세요! : z-ai/glm-4.5-air:free)</div>
           <input class="demo-input" type="text" id="dModel" value="z-ai/glm-4.5-air:free" />
         </div>
       </div>
@@ -702,7 +702,7 @@
 
         <div class="demo-field">
           <div class="demo-label"><span class="demo-tag">[locate]</span> 현재 위치</div>
-          <input class="demo-input" type="text" id="dLocate" value="강원도 강릉시 옥계면 주수로 134" />
+          <input class="demo-input" type="text" id="dLocate" value="경상북도 구미시 옥계북로69" />
         </div>
         <div class="demo-field">
           <div class="demo-label"><span class="demo-tag">[stext]</span> 사용자 발화</div>
@@ -713,7 +713,7 @@
           <textarea class="demo-textarea" id="dMaps">(GS25 옥계점 / 0.3km), (CU 옥계북부점 / 0.7km)</textarea>
         </div>
         <div class="demo-field">
-          <div class="demo-label"><span class="demo-tag">[battery]</span> 배터리 잔량 (%)</div>
+          <div class="demo-label"><span class="demo-tag">[battery]</span> 휠체어 배터리 잔량 (%)</div>
           <div class="demo-battery-row">
             <input class="demo-input" type="number" id="dBattery" min="0" max="100" value="65" oninput="dUpdateBattery()" />
             <div class="demo-bar-wrap"><div class="demo-bar-fill" id="dBarFill"></div></div>
@@ -721,7 +721,7 @@
           </div>
         </div>
         <div class="demo-field">
-          <div class="demo-label"><span class="demo-tag">[can_move]</span> 주행 가능 거리</div>
+          <div class="demo-label"><span class="demo-tag">[can_move]</span> 휠체어 주행 가능 거리</div>
           <input class="demo-input" type="text" id="dCanMove" value="8.2km" />
         </div>
 
