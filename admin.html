@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -89,6 +91,11 @@
     button.danger:hover {
       background: #ff4444;
       color: var(--white);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
     .stats {
@@ -198,13 +205,37 @@
     .back-link:hover {
       gap: 12px;
     }
+
+    .status-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .status-message.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+      display: block;
+    }
+
+    .status-message.error {
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #ffcdd2;
+      display: block;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <a href="/" class="back-link">← 홈으로</a>
     <h1>Admin Panel</h1>
-    <p class="subtitle">접속 기록 확인</p>
+    <p class="subtitle">접속 기록 확인 (Supabase 실시간 동기화)</p>
+
+    <div id="statusMessage" class="status-message"></div>
 
     <div class="stats">
       <div class="stat-box">
@@ -218,8 +249,9 @@
     </div>
 
     <div class="controls">
-      <button onclick="exportData()">CSV 다운로드</button>
-      <button class="danger" onclick="clearData()">기록 초기화</button>
+      <button id="refreshBtn" onclick="loadAndRenderRecords()">🔄 새로고침</button>
+      <button id="exportBtn" onclick="exportData()">📥 CSV 다운로드</button>
+      <button class="danger" id="clearBtn" onclick="clearData()">🗑️ 기록 초기화</button>
     </div>
 
     <div class="records">
@@ -232,7 +264,11 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'admin_access_logs';
+    // Supabase 설정
+    const SUPABASE_URL = 'https://YOUR_SUPABASE_URL.supabase.co'; // 여기에 URL 입력
+    const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY'; // 여기에 anon key 입력
+
+    let supabase = null;
 
     // 현재 시간 포맷 함수 (YY-MM-DD HH:MM AM/PM 형식)
     function formatDateTime(date) {
@@ -247,6 +283,26 @@
       return `${year}-${month}-${day} ${hoursStr}:${minutes} ${ampm}`;
     }
 
+    // 상태 메시지 표시
+    function showStatus(message, type = 'success') {
+      const el = document.getElementById('statusMessage');
+      el.textContent = message;
+      el.className = `status-message ${type}`;
+      setTimeout(() => {
+        el.className = 'status-message';
+      }, 3000);
+    }
+
+    // Supabase 초기화
+    function initSupabase() {
+      if (SUPABASE_URL === 'https://YOUR_SUPABASE_URL.supabase.co') {
+        showStatus('⚠️ Supabase URL과 Key를 설정해주세요!', 'error');
+        return false;
+      }
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      return true;
+    }
+
     // IP 주소 가져오기
     async function getIP() {
       try {
@@ -258,35 +314,62 @@
       }
     }
 
-    // 접속 기록 저장
+    // 서버에 접속 기록 저장
     async function saveAccessLog() {
-      const ip = await getIP();
-      const now = new Date();
-      const record = {
-        time: formatDateTime(now),
-        ip: ip,
-        timestamp: now.getTime()
-      };
+      if (!supabase) return;
+      
+      try {
+        const ip = await getIP();
+        const now = new Date();
+        const timeStr = formatDateTime(now);
 
-      let logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      logs.unshift(record); // 최신 기록을 앞에 추가
-      
-      // 최대 1000개 기록만 유지
-      if (logs.length > 1000) {
-        logs = logs.slice(0, 1000);
+        const { data, error } = await supabase
+          .from('access_logs')
+          .insert([{ time: timeStr, ip: ip }]);
+
+        if (error) {
+          console.error('Save error:', error);
+        } else {
+          await loadAndRenderRecords();
+        }
+      } catch (error) {
+        console.error('Error saving access log:', error);
       }
-      
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-      renderRecords();
-      updateStats();
+    }
+
+    // Supabase에서 기록 로드 및 렌더링
+    async function loadAndRenderRecords() {
+      if (!supabase) return;
+
+      try {
+        const { data: logs, error } = await supabase
+          .from('access_logs')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1000);
+
+        if (error) {
+          console.error('Load error:', error);
+          showStatus(error.message, 'error');
+          return;
+        }
+
+        renderRecords(logs);
+
+        const today = new Date().toISOString().split('T')[0];
+        const todayCount = logs.filter(l => l.created_at.startsWith(today)).length;
+        updateStats(logs.length, todayCount);
+      } catch (error) {
+        console.error('Error loading records:', error);
+        showStatus('데이터 로드 실패', 'error');
+      }
     }
 
     // 기록 렌더링
-    function renderRecords() {
-      const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    function renderRecords(logs) {
       const recordsList = document.getElementById('recordsList');
 
-      if (logs.length === 0) {
+      if (!logs || logs.length === 0) {
         recordsList.innerHTML = `
           <div class="empty-state">
             <div class="empty-state-icon">🌐</div>
@@ -305,56 +388,85 @@
     }
 
     // 통계 업데이트
-    function updateStats() {
-      const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      
-      const todayCount = logs.filter(log => {
-        const logDate = new Date(parseInt(log.timestamp));
-        logDate.setHours(0, 0, 0, 0);
-        return logDate.getTime() === today.getTime();
-      }).length;
-
-      document.getElementById('totalVisits').textContent = logs.length;
-      document.getElementById('todayVisits').textContent = todayCount;
+    function updateStats(total, today) {
+      document.getElementById('totalVisits').textContent = total || 0;
+      document.getElementById('todayVisits').textContent = today || 0;
     }
 
     // CSV 다운로드
-    function exportData() {
-      const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      let csv = 'Time,IP\n';
-      logs.forEach(log => {
-        csv += `"${log.time}","${log.ip}"\n`;
-      });
+    async function exportData() {
+      if (!supabase) return;
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', `access_logs_${new Date().toISOString().split('T')[0]}.csv`);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      try {
+        document.getElementById('exportBtn').disabled = true;
+
+        const { data: logs, error } = await supabase
+          .from('access_logs')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        let csv = 'Time,IP\n';
+        logs.forEach(log => {
+          csv += `"${log.time}","${log.ip}"\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `access_logs_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showStatus('CSV 다운로드 완료!', 'success');
+      } catch (error) {
+        showStatus('CSV 다운로드 실패', 'error');
+        console.error(error);
+      } finally {
+        document.getElementById('exportBtn').disabled = false;
+      }
     }
 
     // 기록 초기화
-    function clearData() {
-      if (confirm('정말 모든 접속 기록을 삭제하시겠습니까?')) {
-        localStorage.removeItem(STORAGE_KEY);
-        renderRecords();
-        updateStats();
+    async function clearData() {
+      if (!supabase) return;
+      if (!confirm('정말 모든 접속 기록을 삭제하시겠습니까?')) return;
+
+      try {
+        document.getElementById('clearBtn').disabled = true;
+
+        const { error } = await supabase
+          .from('access_logs')
+          .delete()
+          .neq('id', '00000000-0000-0000-0000-000000000000');
+
+        if (error) throw error;
+
+        await loadAndRenderRecords();
+        showStatus('모든 기록이 삭제되었습니다.', 'success');
+      } catch (error) {
+        showStatus('기록 삭제 실패', 'error');
+        console.error(error);
+      } finally {
+        document.getElementById('clearBtn').disabled = false;
       }
     }
 
     // 페이지 로드 시 초기화
     window.addEventListener('DOMContentLoaded', () => {
+      if (!initSupabase()) return;
+      
       saveAccessLog();
-      renderRecords();
-      updateStats();
+      loadAndRenderRecords();
+
+      // 5초마다 서버에서 최신 데이터 갱신
+      setInterval(loadAndRenderRecords, 5000);
     });
   </script>
 </body>
 </html>
+

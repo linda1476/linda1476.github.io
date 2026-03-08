@@ -1,0 +1,5 @@
+# GitHub Pages에는 필요 없음 (admin.html에서 Supabase JS SDK 직접 사용)
+# 로컬 테스트용 (선택사항)
+# Flask>=3.0.0
+# flask-cors>=4.0.0
+
